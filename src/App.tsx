@@ -187,9 +187,47 @@ class Word {
 
 let obj2 = new Word('kim', 3, 5, 'park');
 
+function printAll(strs: string | undefined){
+  if (strs && typeof strs ==='string'){
+    return 'kim'
+  }
+}
+
+type Fish = {swim: string};
+type Bird = {fly:string};
+function A(animal: Fish | Bird){
+  if('swim' in animal){
+    return animal.swim
+  }
+  return animal.fly
+}
+
+let day = new Date();
+if ( day instanceof Date){
+  console.log(day)
+}
+
+type Car2 = {
+  wheel : '4개',
+  color : string
+}
+
+type Bike = {
+  wheel : '2개',
+  color : string
+}
+function tazo ( x: Car2 | Bike){
+  if (x.wheel === '4개' ){
+    return x.color
+  }
+  else {
+    return x.color
+  }
+}
+
   return (
     <div className="App">
-      <p>{obj2.num}</p>
+      <p>{tazo({ wheel :'4개', color:'red'})}</p>
     </div>
   );
 }
