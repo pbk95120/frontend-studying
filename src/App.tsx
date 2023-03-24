@@ -225,6 +225,87 @@ function tazo ( x: Car2 | Bike){
   }
 }
 
+function Naver() :never{
+  while ( true ){
+    console.log(123);
+  }
+}
+
+function neveron(parameter: string) {
+  if ( typeof parameter === "string"){
+    parameter + 1;
+  } else {
+    parameter;
+  }
+}
+
+function 함수선언문(){
+  throw new Error()
+}
+
+let 함수표현식 = function (){
+  throw new Error()
+}
+
+class User {
+  public name: string;
+  private familyName :string;
+  protected x = 10;
+
+  constructor(){
+    this.name = 'kim';
+    this.familyName = 'lee';
+    let hello = this.familyName;
+  }
+
+  changeSecret(){
+    this.familyName = 'park';
+  }
+}
+
+class Person { 
+  constructor ( public name :string ){  
+  
+  } 
+}
+
+class NewUser extends User {
+  doThis(){
+    this.x = 20
+  }
+}
+let person1 = new Person('john')
+
+let user1 = new User();
+user1.name = 'park';
+user1.changeSecret()
+
+class User2 { 
+  static skill = 'js'; 
+  intro = User2.skill + 'skillful'
+}
+
+let chulsu = new User();
+
+User2.skill = 'python';
+let minsoo = new User();
+
+class User3 {
+  private static x = 10;
+  public static y = 20;
+
+  static addOne(num :number){
+    User3.x += num;
+  }
+
+  static printX(){
+    console.log(User3.x);
+  }
+}
+
+User3.addOne(3);
+User3.printX();
+
   return (
     <div className="App">
       <p>{tazo({ wheel :'4개', color:'red'})}</p>
