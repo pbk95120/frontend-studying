@@ -1,8 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 import { BlobOptions } from 'buffer';
 import { type } from 'os';
+import {age, Name, Automobile, Bike, ObjFunction} from './a';
+/// <reference path="./a.tsx" />
+namespace GoodDog {
+  export type Dog = string;
+}
+
+namespace BadDog {
+  export interface Dog {name : string};
+}
 
 function App() {
 
@@ -231,14 +239,6 @@ function Naver() :never{
   }
 }
 
-function neveron(parameter: string) {
-  if ( typeof parameter === "string"){
-    parameter + 1;
-  } else {
-    parameter;
-  }
-}
-
 function 함수선언문(){
   throw new Error()
 }
@@ -306,11 +306,61 @@ class User3 {
 User3.addOne(3);
 User3.printX();
 
+let sname :Name ='park';
+
+let mycar :Automobile = {
+  wheel : 4,
+  model : 'P'
+}
+
+let objfunction :ObjFunction = () => {
+  console.log(1);
+}
+
+let dog1 :GoodDog.Dog = 'bark';
+let dog2 :BadDog.Dog = {name : 'paw'};
+
+let box :JSX.Element = <div>boxtest</div>
+
+const [user, setUser] = useState<string | null>('Kim');
+
+let arr3 = [1,2,3];
+let arr4 :[number, number, ...number[]]= [1,2, ...arr3];
+
+let snack :[string, number, string]= ['chip',3000,'good'];
+
+function ade(...rest :[string, boolean, ...(string|number)[]]){
+
+}
+
+function sorting(...rest :(string|number)[]){
+  let result :[string[], number[]] = [[],[]];
+
+  rest.forEach((a)=>{
+    if (typeof a ==='string'){
+      result[0].push(a);
+    } else{
+      result[1].push(a);
+    }
+  })
+
+  return result;
+}
+
   return (
     <div className="App">
-      <p>{tazo({ wheel :'4개', color:'red'})}</p>
+      {user}
+      <p>{box}</p>
+      <Profile name="Park"></Profile>
+      {sorting('b', 5, 6, 8, 'a')}
     </div>
   );
+}
+
+function Profile(props : {name :string}){
+  return (
+    <div>{props.name}</div>
+  )
 }
 
 export default App;
