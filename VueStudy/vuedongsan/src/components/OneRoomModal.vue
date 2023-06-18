@@ -4,7 +4,8 @@
     <div class="white-bg">
       <h4>{{ onerooms[clickNum].title }}</h4>
       <p>{{ onerooms[clickNum].content }}</p>
-      <p>{{ onerooms[clickNum].price }}</p>
+      <input v-model.number="month" />
+      <p>{{ month }}개월 가격 : {{ onerooms[clickNum].price * month }} 원</p>
       <button @click="$emit('closeModal', i)">닫기</button>
     </div>
   </div>
@@ -13,6 +14,22 @@
 <script>
 export default {
   name: "OneRoomModal",
+  data() {
+    return {
+      month: 1,
+    };
+  },
+  watch: {
+    month(month) {
+      if (month > 13) {
+        alert("12이하를 입력 해주세요.");
+      }
+      if (isNaN(month)) {
+        alert("숫자를 입력 해주세요.");
+        this.month = 1;
+      }
+    },
+  },
   props: {
     onerooms: Array,
     modalOn: Boolean,

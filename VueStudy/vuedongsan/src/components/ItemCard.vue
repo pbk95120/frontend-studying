@@ -1,8 +1,5 @@
 /
 <template>
-  <div class="menu">
-    <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
-  </div>
   <div v-for="(oneroom, i) in onerooms" :key="i">
     <img :src="oneroom.image" class="room-img" @click="$emit('openModal', i)" />
     <h4 @click="$emit('openModal', i)">
@@ -26,7 +23,6 @@ export default {
 .menu {
   background: darkslateblue;
   padding: 15px;
-  border-radius: 10px;
 }
 
 .menu a {

@@ -1,10 +1,18 @@
 <template>
-  <OneRoomModal
-    @closeModal="modalOn = false"
-    :onerooms="onerooms"
-    :clickNum="clickNum"
-    :modalOn="modalOn"
-  />
+  <div class="menu">
+    <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
+  </div>
+  <DiscountBanner />
+  <button @click="basicsort()">기본순</button>
+  <button @click="pricesort()">가격순</button>
+  <Transition name="fade">
+    <OneRoomModal
+      @closeModal="modalOn = false"
+      :onerooms="onerooms"
+      :clickNum="clickNum"
+      :modalOn="modalOn"
+    />
+  </Transition>
   <ItemCard
     @openModal="
       modalOn = true;
@@ -14,7 +22,6 @@
     :clickNum="clickNum"
     :modalOn="modalOn"
   />
-  <DiscountBanner />
   <!-- <div v-for="(a, i) in products" :key="i">
     <img :src="require('./assets/room' + i + '.jpg')" class="room-img" />
     <h4 @click="modalOn = true">{{ products[i] }}</h4>
@@ -35,7 +42,8 @@ export default {
   data() {
     return {
       clickNum: 0,
-      onerooms: data,
+      oneroomsOrigin: [...data],
+      onerooms: [...data],
       menus: ["Home", "Shop", "About"],
       prices: [60, 70, 80],
       products: ["역삼동원룸", "천호동원룸", "마포구원룸"],
@@ -46,6 +54,14 @@ export default {
   methods: {
     increase(num) {
       this.report[num] += 1;
+    },
+    basicsort() {
+      this.onerooms = [...this.oneroomsOrigin];
+    },
+    pricesort() {
+      this.onerooms.sort((a, b) => {
+        return a.price - b.price;
+      });
     },
   },
   components: {
@@ -69,5 +85,17 @@ body {
 }
 div {
   box-sizing: border-box;
+}
+
+.fade-enter-from {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  transition: all 1s;
+}
+
+.fade-enter-to {
+  opacity: 1;
 }
 </style>
