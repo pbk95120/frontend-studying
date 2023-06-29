@@ -4,12 +4,14 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li v-if="step === 1" @click="step++">Next</li>
+      <li v-if="step === 2" @click="publish()">발행</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
 
   <ContainerItem
+    @write="message = $event"
     :postdata="postdata"
     :bgimage="bgimage"
     :step="step"
@@ -37,12 +39,33 @@ export default {
       step: 0,
       bgimage: "",
       postdata: postdata,
+      message: "",
+      ClickedFilter: "",
     };
+  },
+  mounted() {
+    this.emitter.on("ClickBox", (a) => {
+      this.ClickedFilter = a;
+    });
   },
   components: {
     ContainerItem: ContainerItem,
   },
   methods: {
+    publish() {
+      let mypost = {
+        name: "추가된글",
+        userImage: "https://placeimg.com/100/100/arch",
+        postImage: this.bgimage,
+        likes: 36,
+        date: "May 15",
+        liked: false,
+        content: this.message,
+        filter: this.ClickedFilter,
+      };
+      this.postdata.unshift(mypost);
+      this.step = 0;
+    },
     more() {
       axios
         .get("https://codingapple1.github.io/vue/more0.json")
@@ -120,6 +143,7 @@ ul {
 .sample-box {
   width: 100%;
   height: 600px;
+
   background-color: bisque;
 }
 .inputfile {
@@ -129,6 +153,7 @@ ul {
   cursor: pointer;
 }
 .add {
+  margin-top: 20px;
   text-align: center;
 }
 #app {

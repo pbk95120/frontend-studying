@@ -5,21 +5,33 @@
     </div>
     <div v-if="step == 1">
       <div
+        :class="ClickedFilter"
         class="upload-image"
         :style="`background-image:url(${bgimage})`"
       ></div>
       <div class="filters">
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
+        <FilterBox
+          :filter="filter"
+          :bgimage="bgimage"
+          v-for="filter in filtersItem"
+          :key="filter"
+          >{{ filter }}</FilterBox
+        >
       </div>
     </div>
     <div v-if="step == 2">
-      <div class="upload-image"></div>
+      <div
+        :class="ClickedFilter"
+        class="upload-image"
+        :style="`background-image:url(${bgimage})`"
+      ></div>
       <div class="write">
-        <textarea class="write-box">write!</textarea>
+        <textarea
+          @input="$emit('write', $event.target.value)"
+          class="write-box"
+        >
+write!</textarea
+        >
       </div>
     </div>
   </div>
@@ -27,9 +39,48 @@
 
 <script>
 import PostItem from "./PostItem.vue";
+import FilterBox from "./FilterBox.vue";
 
 export default {
-  components: { PostItem },
+  data() {
+    return {
+      filtersItem: [
+        "aden",
+        "_1977",
+        "brannan",
+        "brooklyn",
+        "clarendon",
+        "earlybird",
+        "gingham",
+        "hudson",
+        "inkwell",
+        "kelvin",
+        "lark",
+        "lofi",
+        "maven",
+        "mayfair",
+        "moon",
+        "nashville",
+        "perpetua",
+        "reyes",
+        "rise",
+        "slumber",
+        "stinson",
+        "toaster",
+        "valencia",
+        "walden",
+        "willow",
+        "xpro2",
+      ],
+      ClickedFilter: "",
+    };
+  },
+  mounted() {
+    this.emitter.on("ClickBox", (a) => {
+      this.ClickedFilter = a;
+    });
+  },
+  components: { PostItem, FilterBox },
   props: {
     postdata: Array,
     step: Number,

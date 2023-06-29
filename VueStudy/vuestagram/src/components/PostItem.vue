@@ -4,11 +4,14 @@
       <div class="profile"></div>
       <span class="profile-name">{{ postdata.name }}</span>
     </div>
-    <div class="post-body"></div>
+    <div
+      class="post-body"
+      :style="{ backgroundImage: `url(${postdata.postImage})` }"
+    ></div>
     <div class="post-content">
       <p>{{ postdata.likes }} Likes</p>
       <p>
-        <strong>{{ postdata.name }}</strong> {{ postdata.component }}
+        <strong>{{ postdata.name }}</strong> {{ postdata.content }}
       </p>
       <p class="date">{{ postdata.date }}</p>
     </div>
@@ -28,7 +31,6 @@ export default {
   width: 100%;
 }
 .profile {
-  background-image: url("https://placeimg.com/100/100/arch");
   width: 30px;
   height: 30px;
   background-size: 100%;
