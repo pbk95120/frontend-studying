@@ -13,9 +13,6 @@ export default function Write() {
           placeholder="글내용"
           className="p-2.5 block mb-2.5 box-border"
         ></input>
-        <button type="submit" className="bg-grey-300 rounded-md p-2.5">
-          버튼
-        </button>
       </form>
     </div>
   );
