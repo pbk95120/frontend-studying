@@ -1,3 +1,5 @@
+"use client";
+
 export default function Write() {
   return (
     <div className="bg-customBlue p-4">
@@ -13,6 +15,20 @@ export default function Write() {
           placeholder="글내용"
           className="p-2.5 block mb-2.5 box-border"
         ></input>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={async (e) => {
+            if (e.target.files && e.target.files.length > 0) {
+              let file = e.target.files[0];
+              let filename = encodeURIComponent(file.name);
+              let res = await fetch("api/postImage?file=" + filename);
+              res = await res.json();
+              console.log(res);
+            }
+          }}
+        ></input>
+        <button type="submit">제출</button>
       </form>
     </div>
   );
