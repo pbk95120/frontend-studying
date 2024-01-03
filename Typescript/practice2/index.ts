@@ -47,4 +47,78 @@ const subject = (x: { subject: string | string[] }): string => {
   }
 };
 
-console.log(subject({ subject: ["science", "art", "korean"] }));
+type Obj = { x: string };
+type Obj2 = { x: string };
+type Obj3 = Obj2 & Obj;
+let test: Obj3 = { x: "a" };
+
+type Multi = { color?: string; size: number; readonly position: number[] };
+type Multi2 = { name: string; phone: number; email: string; adult: boolean };
+
+type User = { name: string; age: number; plusOne: (x: number) => number; changeName: () => void };
+type CutZero = (x: string) => string;
+const cutZero: CutZero = (x) => {
+  return x.replace(/^0+/, "");
+};
+
+type removeDash = (x: string) => number;
+const removeDash: removeDash = (x) => {
+  return Number(x.replace(/-/g, ""));
+};
+
+type HardFunc = (phoneNumber: string, cutZero: CutZero, removeDash: removeDash) => void;
+
+const hardFunc: HardFunc = (phoneNumber, CutZero, removeDash) => {
+  const result = CutZero(phoneNumber);
+  const result2 = removeDash(result);
+  console.log(result2);
+};
+
+// let image = document.querySelector("#image");
+// if (image instanceof HTMLImageElement) {
+//   image.src = "https://picsum.photos/200/300";
+// }
+
+// let link = document.querySelectorAll(".naver");
+// link.forEach((a) => {
+//   if (a instanceof HTMLAnchorElement) {
+//     a.href = "https://kakao.com";
+//   }
+// });
+
+class Car {
+  carName: string;
+  carPrice: number;
+  constructor(carName: string, carPrice: number) {
+    this.carName = carName;
+    this.carPrice = carPrice;
+  }
+
+  tax(): number {
+    return this.carPrice * 0.1;
+  }
+}
+
+class Word {
+  num: number[];
+  str: string[];
+  constructor(...param: (number | string)[]) {
+    const numbers: number[] = [];
+    const strings: string[] = [];
+    param.forEach((x) => {
+      if (typeof x === "number") {
+        numbers.push(x);
+      } else {
+        strings.push(x);
+      }
+    });
+    this.num = numbers;
+    this.str = strings;
+  }
+}
+
+interface Product {
+  brand: string;
+  serialNumber: number;
+  model: string[];
+}
