@@ -122,3 +122,25 @@ interface Product {
   serialNumber: number;
   model: string[];
 }
+
+interface Person {
+  student: boolean;
+  age: number;
+}
+
+const getMax = (...n: number[]) => {
+  const result = n.sort((a, b) => b - a);
+  return result[0];
+};
+
+interface Objtest {
+  user: string;
+  comment: number[];
+  admin: boolean;
+}
+
+const obj4 = ({ user, comment, admin }: Objtest): void => {
+  console.log({ user, comment, admin });
+};
+
+console.log(obj4({ user: "kim", comment: [3, 5, 4], admin: false }));
