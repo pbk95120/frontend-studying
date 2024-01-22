@@ -1,10 +1,16 @@
+import NameSpace from "./types.ts";
+
 let project: { member: string[]; days: number; started: boolean } = {
   member: ["kim", "park"],
   days: 30,
   started: true,
 };
 
-let school: { score: (number | boolean)[]; teacher: string; friend: string | string[] } = {
+let school: {
+  score: (number | boolean)[];
+  teacher: string;
+  friend: string | string[];
+} = {
   score: [100, 97, 84],
   teacher: "Phil",
   friend: "John",
@@ -24,7 +30,11 @@ const getLength = (idx: string | number): number => {
   return idx.toString().length;
 };
 
-const isMarry = (money: number, house: boolean, charm: string): string | void => {
+const isMarry = (
+  money: number,
+  house: boolean,
+  charm: string
+): string | void => {
   let total: number = 0;
   total += money;
   house ? (total += 500) : null;
@@ -55,7 +65,12 @@ let test: Obj3 = { x: "a" };
 type Multi = { color?: string; size: number; readonly position: number[] };
 type Multi2 = { name: string; phone: number; email: string; adult: boolean };
 
-type User = { name: string; age: number; plusOne: (x: number) => number; changeName: () => void };
+type User = {
+  name: string;
+  age: number;
+  plusOne: (x: number) => number;
+  changeName: () => void;
+};
 type CutZero = (x: string) => string;
 const cutZero: CutZero = (x) => {
   return x.replace(/^0+/, "");
@@ -66,7 +81,11 @@ const removeDash: removeDash = (x) => {
   return Number(x.replace(/-/g, ""));
 };
 
-type HardFunc = (phoneNumber: string, cutZero: CutZero, removeDash: removeDash) => void;
+type HardFunc = (
+  phoneNumber: string,
+  cutZero: CutZero,
+  removeDash: removeDash
+) => void;
 
 const hardFunc: HardFunc = (phoneNumber, CutZero, removeDash) => {
   const result = CutZero(phoneNumber);
@@ -144,3 +163,40 @@ const obj4 = ({ user, comment, admin }: Objtest): void => {
 };
 
 console.log(obj4({ user: "kim", comment: [3, 5, 4], admin: false }));
+class User {
+  private static x = 10;
+  public static y = 20;
+
+  static addOne = (n: number) => {
+    User.x += n;
+  };
+  static printX = () => {
+    console.log(User.x);
+  };
+}
+
+console.log(User.printX());
+
+class Square {
+  constructor(
+    public width: number,
+    public height: number,
+    public color: string
+  ) {}
+  draw = () => {
+    let a = Math.random();
+    let square = `<div style="position:relative; 
+      top:${a * 400}px; 
+      left:${a * 400}px; 
+      width:${this.width}px; 
+      height : ${this.height}px; 
+      background:${this.color}"></div>`;
+    document.body.insertAdjacentHTML("beforeend", square);
+  };
+}
+
+let dog1: NameSpace.ObjectDog = {
+  name: "bark",
+};
+
+let dog2: NameSpace.StringDog = "bark";
