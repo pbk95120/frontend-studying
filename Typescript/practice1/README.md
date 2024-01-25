@@ -1,1 +1,0 @@
-ES6 and Typescript studying
