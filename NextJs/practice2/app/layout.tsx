@@ -1,13 +1,9 @@
 import "./globals.css";
-import { ReactNode } from "react";
+import { RootLayout } from "@/types";
 
 export const metadata = {
   title: "NextJS Course App",
   description: "Your first NextJS app!",
-};
-
-type RootLayout = {
-  children: ReactNode;
 };
 
 export default function RootLayout({ children }: RootLayout) {
