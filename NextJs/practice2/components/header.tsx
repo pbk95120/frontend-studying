@@ -1,11 +1,25 @@
+import Link from "next/link";
 import Image from "next/image";
-import logo from "../public/logo.png";
+import logoImg from "@/assets/logo.png";
+import styles from "@/components/main-header.module.css";
 
 export default function Header() {
   return (
-    <main>
-      <Image src={logo} alt="A server surrounded by magic sparkles." />
-      <h1>Welcome to this NextJS Course!</h1>
-    </main>
+    <header className={styles.header}>
+      <Link className={styles.logo} href="/">
+        <Image src={logoImg} alt="Logo File" />
+        NextLevel Food
+      </Link>
+      <nav className={styles.nav}>
+        <ul>
+          <li>
+            <Link href="/meals">All Meals</Link>
+          </li>
+          <li>
+            <Link href="/community">Foodies Community</Link>
+          </li>
+        </ul>
+      </nav>
+    </header>
   );
 }
