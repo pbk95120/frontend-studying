@@ -2,10 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 import logoImg from "@/assets/logo.png";
 import styles from "@/components/main-header/main-header.module.css";
+import NavLink from "@/components/main-header/nav-link";
+import MainHeaderBackground from "@/components/main-header/main-header-background";
 
 export default function MainHeader() {
   return (
     <>
+      <MainHeaderBackground />
       <header className={styles.header}>
         <Link className={styles.logo} href="/">
           <Image src={logoImg} alt="Logo File" priority />
@@ -14,10 +17,10 @@ export default function MainHeader() {
         <nav className={styles.nav}>
           <ul>
             <li>
-              <Link href="/meals">All Meals</Link>
+              <NavLink href="/meals">Browse Meals</NavLink>
             </li>
             <li>
-              <Link href="/community">Foodies Community</Link>
+              <NavLink href="/community">Foodies Community</NavLink>
             </li>
           </ul>
         </nav>
