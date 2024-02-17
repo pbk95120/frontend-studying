@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import styles from "@/app/meals/[mealSlug]/page.module.css";
 import { getMeal } from "@/lib/getMeals";
+import { MealsType } from "@/types/type";
 
 export default function MealsDetalePage({
   params,
@@ -9,6 +10,7 @@ export default function MealsDetalePage({
   params: { mealSlug: string };
 }) {
   const meal = getMeal(params.mealSlug);
+  console.log(meal);
   return (
     <>
       <header className={styles.header}>

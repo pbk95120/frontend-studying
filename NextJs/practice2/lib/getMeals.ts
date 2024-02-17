@@ -12,5 +12,5 @@ export async function getMeals(): Promise<MealsType[]> {
 export function getMeal(slug: string) {
   return db
     .prepare("SELECT * FROM meals WHERE slug = ?")
-    .get(slug) as MealsType[];
+    .get(slug) as MealsType;
 }
