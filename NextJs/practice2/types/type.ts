@@ -23,3 +23,8 @@ export interface MealsType {
 export interface MealsGridProps {
   meals: MealsType[];
 }
+
+export interface ImagePickerProps {
+  label: string | undefined;
+  name: string | undefined;
+}
