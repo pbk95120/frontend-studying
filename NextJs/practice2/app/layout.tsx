@@ -3,8 +3,8 @@ import { LayoutType } from "@/types/type";
 import MainHeader from "@/components/main-header/main-header";
 
 export const metadata = {
-  title: "NextJS Course App",
-  description: "Your first NextJS app!",
+  title: "NextJS Food",
+  description: "NextJS Food App!",
 };
 
 export default function RootLayout({ children }: LayoutType) {
