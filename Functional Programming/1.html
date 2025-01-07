@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/fxjs/dist/fx.js"></script>
+    <script>
+      const { L, C } = window._;
+    </script>
+  </head>
+  <body>
+    <script>
+      const f1 = (limit, list) => {
+        let acc = 0;
+        for (const a of list) {
+          if (a % 2) {
+            const b = a * a;
+            acc += b;
+            if (--limit == 0) break;
+          }
+        }
+        console.log(acc);
+      };
+      f1(3, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+      const f2 = (limit, list) => {
+        _.go(
+          list,
+          _.filter((a) => a % 2),
+          _.take(limit),
+          _.map((a) => a * a),
+          _.reduce((acc, b) => acc + b),
+          console.log
+        );
+      };
+      f2(3, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
+      const f3 = (end) => {
+        let i = 1;
+        while (i < end) {
+          console.log(i);
+          i += 2;
+        }
+      };
+      f3(10);
+      const f4 = (end) => {
+        _.go(_.range(1, end, 2), _.each(console.log));
+      };
+
+      const join = (sep) => _.reduce((a, b) => `${a}${sep}${b}`);
+      _.go(
+        L.range(1, 6),
+        L.map(L.range),
+        L.map(L.map((_) => "*")),
+        L.map(join("")),
+        join("\n"),
+        console.log
+      );
+      _.go(
+        _.range(2, 10),
+        L.map((a) =>
+          _.go(
+            L.range(1, 10),
+            L.map((b) => `${a}x${b} = ${a * b}`),
+            join("\n")
+          )
+        ),
+        join("\n\n"),
+        console.log
+      );
+    </script>
+  </body>
+</html>

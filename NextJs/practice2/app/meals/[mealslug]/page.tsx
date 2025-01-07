@@ -4,6 +4,22 @@ import { notFound } from "next/navigation";
 import styles from "@/app/meals/[mealSlug]/page.module.css";
 import { getMeal } from "@/lib/getMeals";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { mealSlug: string };
+}) {
+  const meal = getMeal(params.mealSlug);
+  if (!meal) {
+    return notFound();
+  }
+
+  return {
+    title: meal.title,
+    description: meal.summary,
+  };
+}
+
 export default function MealsDetalePage({
   params,
 }: {
