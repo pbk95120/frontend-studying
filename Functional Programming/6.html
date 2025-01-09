@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/fxjs/dist/fx.js"></script>
+    <script>
+      const { L, C } = window._;
+    </script>
+  </head>
+  <body>
+    <!-- 1. range와 take의 재해석
+    <script>
+      _.go(_.range(10), _.take(3), _.each(console.log));
+
+      _.go(
+        L.range(1, 10),
+        L.map(_.delay(1000)),
+        L.filter((a) => a % 2),
+        L.map((_) => new Date()),
+        L.take(3),
+        _.each(console.log)
+      );
+    </script>
+    2. takeWhile, takeUntil
+    <script>
+      _.go(
+        [1, 2, 3, 4, 5, 6, 7, 8, 0, 0, 0],
+        L.takeWhile((a) => a),
+        _.each(console.log)
+      );
+
+      _.go(
+        [1, 2, 3, 4, 5, 6, 7, 8, 0, 0, 0],
+        L.takeUntil((a) => a),
+        _.each(console.log)
+      );
+
+      _.fo(
+        [0, false, undefined, null, 10, 20, 30],
+        L.takeWhile((a) => a),
+        _.each(console.log)
+      );
+    </script>
+    3. 할 일들을 이터러블로 바라보기
+    <script>
+      const track = [
+        {
+          cars: ["철수", "영희", "철희", "영수"],
+        },
+        {
+          cars: ["a", "b", "c", "d"],
+        },
+        {
+          cars: ["철수", "영희", "철희", "영수"],
+        },
+        {
+          cars: ["1", "2", "3", "4"],
+        },
+        {
+          cars: [],
+        },
+      ];
+
+      _.go(
+        L.range(Infinity),
+        L.map((i) => track[i]),
+        L.map(({ cars }) => cars),
+        L.map(_.delay(1000)),
+        L.takeWhile(({ length: l }) => l == 4),
+        L.flat,
+        L.map((car) => `${car}출발!`),
+        _.each(console.log)
+      );
+    </script> -->
+    4. 아임포트 결제 누락 스케쥴러 만들기
+    <script>
+      const Impt = {
+        payments: {
+          1: [
+            { imp_id: 11, order_id: 1, amount: 15000 },
+            { imp_id: 12, order_id: 2, amount: 25000 },
+            { imp_id: 13, order_id: 3, amount: 10000 },
+          ],
+          2: [
+            { imp_id: 14, order_id: 4, amount: 25000 },
+            { imp_id: 15, order_id: 5, amount: 45000 },
+            { imp_id: 16, order_id: 6, amount: 15000 },
+          ],
+          3: [
+            { imp_id: 17, order_id: 7, amount: 20000 },
+            { imp_id: 18, order_id: 8, amount: 30000 },
+          ],
+          4: [],
+          5: [],
+        },
+
+        getPayments: (page) => {
+          console.log(`http://..?page=${page}`);
+          return _.delay(1000 * 2, Impt.payments[page]);
+        },
+
+        canclePayment: (imp_id) => Promise.resolve(`${imp_id} 결제 취소 완료`),
+      };
+
+      const DB = {
+        getOrders: (ids) => _.delay(100, [{ id: 1 }, { id: 3 }, { id: 7 }]),
+      };
+
+      async function job() {
+        const payments = await _.go(
+          L.range(1, Infinity),
+          L.map(Impt.getPayments),
+          L.takeUntil(({ length }) => length < 3),
+          _.flat
+        );
+
+        const order_ids = await _.go(
+          payments,
+          _.map((p) => p.order_id),
+          DB.getOrders,
+          _.map(({ id }) => id)
+        );
+
+        await _.go(
+          payments,
+          L.reject((p) => order_ids.includes(p.order_id)),
+          L.map((p) => p.imp_id),
+          L.map(Impt.canclePayment),
+          _.each(console.log)
+        );
+      }
+
+      // 5초에 한 번만 한다.
+      (function recur() {
+        Promise.all([_.delay(7000, undefined), job()]).then(recur);
+      })();
+    </script>
+  </body>
+</html>
