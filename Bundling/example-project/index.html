@@ -4,14 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Emoji of the Day</title>
-
+    <link rel="stylesheet" href="./style.css" />
+    <!-- <script src="https://cdn.jsdelivr.net/npm/date-fns@3.6.0/cdn.min.js"></script> -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap"
       rel="stylesheet"
     />
-    <script src="https://cdn.jsdelivr.net/npm/date-fns@3.6.0/cdn.min.js"></script>
-
-    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <div class="container">
@@ -24,7 +22,11 @@
       </div>
     </div>
 
+    <!-- 개별 스크립트는 더 이상 필요 없어요 -->
+    <!-- <script src="./emoji.js"></script> -->
+    <!-- <script src="./main.js"></script> -->
+
+    <!-- 번들링된 스크립트만 사용해요 -->
     <script src="./dist/bundle.js"></script>
-    <script src="./main.js"></script>
   </body>
 </html>
